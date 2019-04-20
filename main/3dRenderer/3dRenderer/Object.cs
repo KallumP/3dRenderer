@@ -28,31 +28,21 @@ namespace _3dRenderer {
             if (dimension == 2) {
 
                 coords.Add(new double[1, 3] { { -1 * scale, -1 * scale, 0 } });
-
                 coords.Add(new double[1, 3] { { 1 * scale, -1 * scale, 0 } });
-
                 coords.Add(new double[1, 3] { { -1 * scale, 1 * scale, 0 } });
-
                 coords.Add(new double[1, 3] { { 1 * scale, 1 * scale, 0 } });
 
 
             } else if (dimension == 3) {
 
                 coords.Add(new double[1, 3] { { -1 * scale, -1 * scale, -1 * scale } });
-
                 coords.Add(new double[1, 3] { { 1 * scale, -1 * scale, -1 * scale } });
-
                 coords.Add(new double[1, 3] { { -1 * scale, 1 * scale, -1 * scale } });
-
                 coords.Add(new double[1, 3] { { 1 * scale, 1 * scale, -1 * scale } });
 
-
                 coords.Add(new double[1, 3] { { -1 * scale, -1 * scale, 1 * scale } });
-
                 coords.Add(new double[1, 3] { { 1 * scale, -1 * scale, 1 * scale } });
-
                 coords.Add(new double[1, 3] { { -1 * scale, 1 * scale, 1 * scale } });
-
                 coords.Add(new double[1, 3] { { 1 * scale, 1 * scale, 1 * scale } });
 
             }
@@ -105,7 +95,6 @@ namespace _3dRenderer {
                 e.Graphics.DrawLine(Pens.Black, (float)coords[1][0, 0], (float)coords[1][0, 1], (float)coords[5][0, 0], (float)coords[5][0, 1]);
                 e.Graphics.DrawLine(Pens.Black, (float)coords[2][0, 0], (float)coords[2][0, 1], (float)coords[6][0, 0], (float)coords[6][0, 1]);
                 e.Graphics.DrawLine(Pens.Black, (float)coords[3][0, 0], (float)coords[3][0, 1], (float)coords[7][0, 0], (float)coords[7][0, 1]);
-
 
                 e.Graphics.DrawLine(Pens.Black, (float)coords[4][0, 0], (float)coords[4][0, 1], (float)coords[5][0, 0], (float)coords[5][0, 1]);
                 e.Graphics.DrawLine(Pens.Black, (float)coords[5][0, 0], (float)coords[5][0, 1], (float)coords[7][0, 0], (float)coords[7][0, 1]);

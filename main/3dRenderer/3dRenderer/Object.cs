@@ -13,9 +13,9 @@ namespace _3dRenderer {
         public static int dimension;
         Point center;
 
-        public static int scale = 100;
+        public static int scale = 1000;
         public static double angle = 0.007;
-        public static double distance = 2;
+        public static double distance = 3;
 
         /// <summary>
         /// The constructor to the object class
@@ -131,9 +131,9 @@ namespace _3dRenderer {
 
 
                         //draws the vertexes
-                        dotSize = (10 + coords[i][0, 2]) * 2;
+                        dotSize = (10 + coords[i][0, 2]) * 1;
                         e.Graphics.FillEllipse(Brushes.Black, (float)first[0, 0] * scale - (float)dotSize / 2, (float)first[0, 1] * scale - (float)dotSize / 2, (float)dotSize, (float)dotSize);
-                        dotSize = (10 + coords[j][0, 2]) * 2;
+                        dotSize = (10 + coords[j][0, 2]) * 1;
                         e.Graphics.FillEllipse(Brushes.Black, (float)second[0, 0] * scale - (float)dotSize / 2, (float)second[0, 1] * scale - (float)dotSize / 2, (float)dotSize, (float)dotSize);
 
                         //draws the edges

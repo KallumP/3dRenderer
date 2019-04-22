@@ -247,7 +247,7 @@
             // 
             this.scale_bar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.scale_bar.Location = new System.Drawing.Point(12, 342);
-            this.scale_bar.Maximum = 500;
+            this.scale_bar.Maximum = 5000;
             this.scale_bar.Minimum = 100;
             this.scale_bar.Name = "scale_bar";
             this.scale_bar.Size = new System.Drawing.Size(295, 45);

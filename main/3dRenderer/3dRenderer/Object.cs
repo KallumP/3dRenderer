@@ -8,65 +8,95 @@ using System.Windows.Forms;
 
 namespace _3dRenderer {
     class Object {
-        List<double[,]> coords = new List<double[,]>();
-        int scale = 100;
-        double angle = 0.01;
 
+        List<double[,]> coords = new List<double[,]>();
+        public static int dimension;
         Point center;
+
+        public static int scale = 100;
+        public static double angle = 0.007;
+        public static double distance = 2;
 
         /// <summary>
         /// The constructor to the object class
         /// </summary>
-        /// <param name="dimension">lets the class know how many dimentions to make points to</param>
+        /// <param name="_dimension">lets the class know how many dimentions to make points to</param>
         /// <param name="_center">lets the class know where to translate to before drawing</param>
-        public Object(int dimension, Point _center) {
+        public Object(int _dimension, Point _center) {
+
+            dimension = _dimension;
 
             //sets what coordinate to tranlate to before drawing
             center = _center;
 
             //creates a new object with the right amonut of points and the right coords
-            if (dimension == 2) {
+            if (_dimension == 2) {
 
-                coords.Add(new double[1, 3] { { -1 * scale, -1 * scale, 0 } });
-                coords.Add(new double[1, 3] { { 1 * scale, -1 * scale, 0 } });
-                coords.Add(new double[1, 3] { { -1 * scale, 1 * scale, 0 } });
-                coords.Add(new double[1, 3] { { 1 * scale, 1 * scale, 0 } });
+                coords.Add(new double[1, 4] { { -1, -1, 0, 0 } });
+                coords.Add(new double[1, 4] { { 1, -1, 0, 0 } });
+                coords.Add(new double[1, 4] { { -1, 1, 0, 0 } });
+                coords.Add(new double[1, 4] { { 1, 1, 0, 0 } });
+
+            } else if (_dimension == 3) {
+
+                coords.Add(new double[1, 4] { { -1, -1, -1, 0 } });
+                coords.Add(new double[1, 4] { { 1, -1, -1, 0 } });
+                coords.Add(new double[1, 4] { { -1, 1, -1, 0 } });
+                coords.Add(new double[1, 4] { { 1, 1, -1, 0 } });
+
+                coords.Add(new double[1, 4] { { -1, -1, 1, 0 } });
+                coords.Add(new double[1, 4] { { 1, -1, 1, 0 } });
+                coords.Add(new double[1, 4] { { -1, 1, 1, 0 } });
+                coords.Add(new double[1, 4] { { 1, 1, 1, 0 } });
+
+            } else if (_dimension == 4) {
+
+                coords.Add(new double[1, 4] { { -1, -1, -1, 1 } });
+                coords.Add(new double[1, 4] { { 1, -1, -1, 1 } });
+                coords.Add(new double[1, 4] { { -1, 1, -1, 1 } });
+                coords.Add(new double[1, 4] { { 1, 1, -1, 1 } });
+
+                coords.Add(new double[1, 4] { { -1, -1, 1, 1 } });
+                coords.Add(new double[1, 4] { { 1, -1, 1, 1 } });
+                coords.Add(new double[1, 4] { { -1, 1, 1, 1 } });
+                coords.Add(new double[1, 4] { { 1, 1, 1, 1 } });
 
 
-            } else if (dimension == 3) {
+                coords.Add(new double[1, 4] { { -1, -1, -1, -1 } });
+                coords.Add(new double[1, 4] { { 1, -1, -1, -1 } });
+                coords.Add(new double[1, 4] { { -1, 1, -1, -1 } });
+                coords.Add(new double[1, 4] { { 1, 1, -1, -1 } });
 
-                coords.Add(new double[1, 3] { { -1 * scale, -1 * scale, -1 * scale } });
-                coords.Add(new double[1, 3] { { 1 * scale, -1 * scale, -1 * scale } });
-                coords.Add(new double[1, 3] { { -1 * scale, 1 * scale, -1 * scale } });
-                coords.Add(new double[1, 3] { { 1 * scale, 1 * scale, -1 * scale } });
-
-                coords.Add(new double[1, 3] { { -1 * scale, -1 * scale, 1 * scale } });
-                coords.Add(new double[1, 3] { { 1 * scale, -1 * scale, 1 * scale } });
-                coords.Add(new double[1, 3] { { -1 * scale, 1 * scale, 1 * scale } });
-                coords.Add(new double[1, 3] { { 1 * scale, 1 * scale, 1 * scale } });
-
+                coords.Add(new double[1, 4] { { -1, -1, 1, -1 } });
+                coords.Add(new double[1, 4] { { 1, -1, 1, -1 } });
+                coords.Add(new double[1, 4] { { -1, 1, 1, -1 } });
+                coords.Add(new double[1, 4] { { 1, 1, 1, -1 } });
             }
         }
 
         /// <summary>
         /// rotates the points in the object, and allows checks which axis to rotate on
         /// </summary>
-        /// <param name="xRot">a value that states whether to rotate on this axis</param>
-        /// <param name="yRot">a value that states whether to rotate on this axis</param>
-        /// <param name="zRot">a value that states whether to rotate on this axis</param>
-        public void Rotate(bool xRot, bool yRot, bool zRot) {
+        /// <param name="yxRot">a value that states whether to rotate on this axis</param>
+        /// <param name="xzRot">a value that states whether to rotate on this axis</param>
+        /// <param name="xyRot">a value that states whether to rotate on this axis</param>
+        public void Rotate(bool yxRot, bool xzRot, bool xyRot, bool xwRot) {
 
-            if (xRot == true) 
+            if (yxRot == true)
                 for (int i = 0; i < coords.Count; i++)
-                    coords[i] = Matrix.multiply(coords[i], Matrix.xRotation(angle));
+                    coords[i] = Matrix.multiply(coords[i], Matrix.yzRotation(angle));
 
-            if (yRot == true)
+            if (xzRot == true)
                 for (int i = 0; i < coords.Count; i++)
-                    coords[i] = Matrix.multiply(coords[i], Matrix.yRotation(angle));
+                    coords[i] = Matrix.multiply(coords[i], Matrix.xzRotation(angle));
 
-            if (zRot == true)
+            if (xyRot == true)
                 for (int i = 0; i < coords.Count; i++)
-                    coords[i] = Matrix.multiply(coords[i], Matrix.zRotation(angle));
+                    coords[i] = Matrix.multiply(coords[i], Matrix.xyRotation(angle));
+
+            if (xwRot == true)
+                for (int i = 0; i < coords.Count; i++)
+                    coords[i] = Matrix.multiply(coords[i], Matrix.xwRotation(angle));
         }
 
         /// <summary>
@@ -75,31 +105,43 @@ namespace _3dRenderer {
         /// <param name="e"></param>
         public void Draw(PaintEventArgs e) {
 
-            //allows the program to draw from the center of the screen
+            double dotSize;
+
+            //forces the program to draw to the center of the screen
             e.Graphics.TranslateTransform(center.X, center.Y);
 
-            //checks to see how many points there are before drawing them out
-            if (coords.Count == 4) {
-                e.Graphics.DrawLine(Pens.Black, (float)coords[0][0, 0], (float)coords[0][0, 1], (float)coords[1][0, 0], (float)coords[1][0, 1]);
-                e.Graphics.DrawLine(Pens.Black, (float)coords[1][0, 0], (float)coords[1][0, 1], (float)coords[3][0, 0], (float)coords[3][0, 1]);
-                e.Graphics.DrawLine(Pens.Black, (float)coords[0][0, 0], (float)coords[0][0, 1], (float)coords[2][0, 0], (float)coords[2][0, 1]);
-                e.Graphics.DrawLine(Pens.Black, (float)coords[2][0, 0], (float)coords[2][0, 1], (float)coords[3][0, 0], (float)coords[3][0, 1]);
-            } else if (coords.Count == 8) {
+            //checks to see if the vertexes are the right distance apart
+            for (int i = 0; i < coords.Count; i++) {
+                for (int j = i + 1; j < coords.Count; j++) {
 
-                e.Graphics.DrawLine(Pens.Black, (float)coords[0][0, 0], (float)coords[0][0, 1], (float)coords[1][0, 0], (float)coords[1][0, 1]);
-                e.Graphics.DrawLine(Pens.Black, (float)coords[1][0, 0], (float)coords[1][0, 1], (float)coords[3][0, 0], (float)coords[3][0, 1]);
-                e.Graphics.DrawLine(Pens.Black, (float)coords[0][0, 0], (float)coords[0][0, 1], (float)coords[2][0, 0], (float)coords[2][0, 1]);
-                e.Graphics.DrawLine(Pens.Black, (float)coords[2][0, 0], (float)coords[2][0, 1], (float)coords[3][0, 0], (float)coords[3][0, 1]);
+                    if (Matrix.distance(coords[i], coords[j], scale)) {
 
-                e.Graphics.DrawLine(Pens.Black, (float)coords[0][0, 0], (float)coords[0][0, 1], (float)coords[4][0, 0], (float)coords[4][0, 1]);
-                e.Graphics.DrawLine(Pens.Black, (float)coords[1][0, 0], (float)coords[1][0, 1], (float)coords[5][0, 0], (float)coords[5][0, 1]);
-                e.Graphics.DrawLine(Pens.Black, (float)coords[2][0, 0], (float)coords[2][0, 1], (float)coords[6][0, 0], (float)coords[6][0, 1]);
-                e.Graphics.DrawLine(Pens.Black, (float)coords[3][0, 0], (float)coords[3][0, 1], (float)coords[7][0, 0], (float)coords[7][0, 1]);
+                        double[,] first = coords[i];
+                        double[,] second = coords[j];
 
-                e.Graphics.DrawLine(Pens.Black, (float)coords[4][0, 0], (float)coords[4][0, 1], (float)coords[5][0, 0], (float)coords[5][0, 1]);
-                e.Graphics.DrawLine(Pens.Black, (float)coords[5][0, 0], (float)coords[5][0, 1], (float)coords[7][0, 0], (float)coords[7][0, 1]);
-                e.Graphics.DrawLine(Pens.Black, (float)coords[4][0, 0], (float)coords[4][0, 1], (float)coords[6][0, 0], (float)coords[6][0, 1]);
-                e.Graphics.DrawLine(Pens.Black, (float)coords[6][0, 0], (float)coords[6][0, 1], (float)coords[7][0, 0], (float)coords[7][0, 1]);
+                        //projects the higher dimensional points to 2d
+                        first = Matrix.multiply(first, Matrix.projection4to3(coords[i][0, 3]));
+                        second = Matrix.multiply(second, Matrix.projection4to3(coords[j][0, 3]));
+
+                        first = Matrix.multiply(first, Matrix.projection3to2(coords[i][0, 2]));
+                        second = Matrix.multiply(second, Matrix.projection3to2(coords[j][0, 2]));
+
+                        //the second set was meant to be sending in the 3rd dimention ([0,2]) I put in [0,3] by accident :)
+
+
+
+                        //draws the vertexes
+                        dotSize = (10 + coords[i][0, 2]) * 2;
+                        e.Graphics.FillEllipse(Brushes.Black, (float)first[0, 0] * scale - (float)dotSize / 2, (float)first[0, 1] * scale - (float)dotSize / 2, (float)dotSize, (float)dotSize);
+                        dotSize = (10 + coords[j][0, 2]) * 2;
+                        e.Graphics.FillEllipse(Brushes.Black, (float)second[0, 0] * scale - (float)dotSize / 2, (float)second[0, 1] * scale - (float)dotSize / 2, (float)dotSize, (float)dotSize);
+
+                        //draws the edges
+                        e.Graphics.DrawLine(Pens.Black, (float)first[0, 0] * scale, (float)first[0, 1] * scale, (float)second[0, 0] * scale, (float)second[0, 1] * scale);
+                    }
+                }
+
+
             }
         }
     }

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace _3dRenderer {
+namespace _3Drenderer {
     public partial class Form1 : Form {
 
         Object item;

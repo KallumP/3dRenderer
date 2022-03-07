@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _3dRenderer {
+namespace _3Drenderer {
     class Matrix {
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace _3dRenderer {
             return newMatrix;
         }
 
-        public static double[,] projection3to2( double _z) {
+        public static double[,] projection3to2(double _z) {
 
             double p = 1 / (Object.distance - _z);
 

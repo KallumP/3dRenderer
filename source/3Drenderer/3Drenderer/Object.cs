@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace _3dRenderer {
+namespace _3Drenderer {
     class Object {
 
         List<double[,]> coords = new List<double[,]>();

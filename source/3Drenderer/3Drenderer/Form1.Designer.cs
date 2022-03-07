@@ -1,4 +1,4 @@
-﻿namespace _3dRenderer {
+﻿namespace _3Drenderer {
     partial class Form1 {
         /// <summary>
         /// Required designer variable.
